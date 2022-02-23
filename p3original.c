@@ -1,5 +1,4 @@
 #include<stdio.h>
-
 int input_number()
 {
   int n;
@@ -7,7 +6,6 @@ int input_number()
   scanf("%d",&n);
   return n;
 }
-
 int is_prime(int n)
 {
   int i, temp = 0;
@@ -21,7 +19,6 @@ int is_prime(int n)
   }
   return temp;
 }
-
 void output(int n, int isprime)
 {
   if (isprime == 0)
@@ -29,7 +26,6 @@ void output(int n, int isprime)
   else
   printf("%d is not a prime number.\n", n);
 }
-
 int main()
 {
   int n,isprime;

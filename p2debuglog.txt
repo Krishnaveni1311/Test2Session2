@@ -46,25 +46,75 @@ enter the points
 (gdb) n
 main () at p1original.c:22
 22    find_distance(x1,y1,x2,y2,&distance);
+ 
+ gcc -g p2original.c
+ gdb a.out
+GNU gdb (Ubuntu 8.1.1-0ubuntu1) 8.1.1
+Copyright (C) 2018 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+<http://www.gnu.org/software/gdb/documentation/>.
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from a.out...done.
+(gdb) b main
+Breakpoint 1 at 0x83c: file p2original.c, line 21.
+(gdb) r
+Starting program: /home/runner/Test2Session2/a.out 
+warning: Error disabling address space randomization: Operation not permitted
+
+Breakpoint 1, main () at p2original.c:21
+21  {
+(gdb) n
+24    input_triangle(&x1,&y1,&x2,&y2,&x3,&y3);
 (gdb) s
-find_distance (x1=2, y1=3, x2=3, y2=4, distance=0x7fff7e1f77f4)
-    at p1original.c:12
-12    *distance=sqrt((x2-x1)*(x2-x1)+(y2-y1)*(y2-y1));
+input_triangle (x1=0x7ffed18c795c, y1=0x7ffed18c7960, x2=0x7ffed18c7964, 
+    y2=0x7ffed18c7968, x3=0x7ffed18c796c, y3=0x7ffed18c7970) at p2original.c:5
+5     printf("enter the sides of triangle\n");
 (gdb) n
-13  }
+enter the sides of triangle
+6     scanf("%f%f%f%f%f%f",x1,y1,x2,y2,x3,y3);
 (gdb) n
-main () at p1original.c:23
-23    output(x1,y1,x2,y2,distance);
+3
+4
+5
+6
+7
+1
+7   }
+(gdb) n
+main () at p2original.c:25
+25    istriangle=is_triangle(x1,y1,x2,y2,x3,y3);
 (gdb) s
-output (x1=2, y1=3, x2=3, y2=4, distance=1.41421354) at p1original.c:16
-16    printf("the distance between the points(%.1f,%.1f)and (%.f,%.f) is %.1f",x1,y1,x2,y2,distance);
+is_triangle (x1=3, y1=4, x2=5, y2=6, x3=7, y3=1) at p2original.c:10
+10    int istriangle=(x1*(y2-y1)+x2*(y3-y1)+x3*(y1-y2));
 (gdb) n
-17  }
+11    return istriangle;
 (gdb) n
-main () at p1original.c:24
-24    return 0;
+12  }
 (gdb) n
-25  }(gdb) c
+main () at p2original.c:26
+26    output(x1,y1,x2,y2,x3,y3,istriangle);
+(gdb) s
+output (x1=3, y1=4, x2=5, y2=6, x3=7, y3=1, istriangle=-23) at p2original.c:15
+15    if(istriangle==0)
+(gdb) n
+18    printf("it is triangle\n");
+(gdb) n
+it is triangle
+19  }
+(gdb) n
+main () at p2original.c:27
+27    return 0;
+(gdb) n
+28  }(gdb) c
 Continuing.
-the distance between the points(2.0,3.0)and (3,4) is 1.4[Inferior 1 (process 405) exited normally]
+[Inferior 1 (process 1856) exited normally]
 (gdb) 
